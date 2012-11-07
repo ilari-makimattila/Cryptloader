@@ -1,0 +1,4 @@
+*~
+files/*
+*.kate-swp
+node_modules/*

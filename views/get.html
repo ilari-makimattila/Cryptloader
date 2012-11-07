@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cryptloader</title>
+<script src="/static/sjcl.js"></script>
+<script src="/static/get.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <section id="waiter">
+        <h2>Your file is being loaded</h2>
+        <p>
+            The file will be downloaded and decrypted in the background.
+            You will see a save link when it's ready.
+        </p>
+    </section>
+    <section id="fileready" style="display: none">
+        <h2>Your file is ready.</h2>
+
+        <p><a href="#" id="file" download="file.bin">Download</a></p>
+    </section>
+</div>
+</body>
+</html>

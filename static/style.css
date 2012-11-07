@@ -1,0 +1,49 @@
+body
+{
+    background: #ddd;
+}
+
+section
+{
+    box-shadow: 3px 3px 6px 0 #999;
+    border-radius: 9px;
+    margin: 9px;
+    padding: 3px 10px;
+    float: left;
+    text-align: justify;
+}
+
+h2
+{
+    margin: 0;
+    text-align: center;
+}
+
+#droparea
+{
+    background: #ebc;
+    width: 40%;
+}
+
+#passwordarea
+{
+    background: #bec;
+    text-align: center;
+    width: 50%;
+}
+
+#passwordarea input
+{
+    width: 99%;
+}
+
+#fileurlarea
+{
+    width: 50%;
+    background: #cbe;
+}
+
+#fileurlarea ul
+{
+    list-style-type: none;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cryptloader</title>
+
+    <script src="/static/sjcl.js"></script>
+    <script src="/static/cryptloader.js"></script>
+    <script src="/static/index.js"></script>
+
+    <link href="/static/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="wrapper">
+    <section id="droparea">
+        <h2>Drop your files here</h2>
+        <p>
+            The files you drag&amp;drop here will be automatically uploaded
+            to the server and you will get a link from where you can download
+            them.
+        <p>
+            Before uploading the files will be encrypted using the
+            password in the <em>Password</em> field.
+        </p>
+        <p>
+            Your password will not be sent to the server, ever. It is,
+            however, passed to the file url as plain text, so using your
+            default password may not be a good choice.
+        </p>
+    </section>
+    <section id="passwordarea">
+        <h2>Encryption password</h2>
+        <input type="text" id="password">
+    </section>
+    <section id="fileurlarea">
+        <h2>Your uploaded files</h2>
+        <ul id="fileurllist">
+        </ul>
+    </section>
+</div>
+</body>
+</html>
