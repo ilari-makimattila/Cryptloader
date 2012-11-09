@@ -3,15 +3,15 @@
 This is a proof of concept application that takes drag&dropped files,
 encrypts them on the client side and uploads crypted file to the server.
 
-Encrypting is done using [http://crypto.stanford.edu/sjcl/](Standford Javascript Crypto Library)
+Encrypting is done using [Standford Javascript Crypto Library](http://crypto.stanford.edu/sjcl/)
 and it actually is not the interesting part of this PoC.
 
 The files are read using HTML5 File API, serialized using JS typed arrays and
 moved between server and client using Websockets.
 
-Client side javascript is pure [http://vanilla-js.com/](Vanilla-JS) and
+Client side javascript is pure [Vanilla-JS](http://vanilla-js.com/) and
 the server is implemented using node.js. It requires just one module,
-[https://github.com/Worlize/WebSocket-Node](Websocket-Node) and it can be
+[Websocket-Node](https://github.com/Worlize/WebSocket-Node) and it can be
 installed using the npm.
 
 I have tested the server with nodejs version 0.8.14 and the client side with
