@@ -124,6 +124,13 @@ containing the id, slice number and file data.
 Client can continue to ask slices using the message type _getslice_, until
 all slices are received.
 
+On error the server will send a message type _error_. The _data_ will contain
+something about the error. It may be a string or an exception object.
+
+```javascript
+{"type":"error", "data":"Something went wrong"}
+```
+
 ## License ##
 
 The code is licensed under the GNU GPL version 3 or higher.
