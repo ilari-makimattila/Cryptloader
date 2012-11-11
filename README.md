@@ -31,6 +31,13 @@ is written to href attribute of a anchor tag.
 As everyone should imagine, this is fairly big process and has a lot of
 overhead. So when you test it out, I suggest not to try it with big files...
 
+## Installation and running ##
+
+1. Create directory _files_ into the repository root
+2. npm install websocket
+3. node server.js
+4. Point your browser to http://localhost:8888
+
 ## Websocket protocol definition ##
 
 All messages use the same data structure:
