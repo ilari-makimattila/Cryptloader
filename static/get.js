@@ -39,7 +39,6 @@ var get_handlers =
             var passwd = parser.hash.substring(1)
             console.log("Decrypting using password " + passwd)
             var decrypted = sjcl.decrypt(passwd, data["data"])
-            //var decrypted = data["data"]
 
             console.log(JSON.parse(decrypted))
 
@@ -62,6 +61,10 @@ var get_handlers =
                 console.log("File transfer complete!")
 
                 console.log(file_contents[file]["data"])
+
+                // We need to create a Blob from the array of Int32Arrays
+                // so we can convert it to a DataURL which can be opened
+                // in browser
                 var blob = new Blob(file_contents[file]["data"])
                 delete file_contents[file]
 
@@ -77,9 +80,6 @@ var get_handlers =
                     document.getElementById("fileready").style.display = "block"
                 }
                 reader.readAsDataURL(blob)
-
-
-
             }
         }
         else

@@ -1,6 +1,9 @@
 var FILE_SLICE_SIZE = 10240
 var file_queue = {}
 
+// Converts the array to a string representing a JSON array, ie. "[1,2,3,4]"
+// JSON.stringify(int32array) creates an object like '{"0":1,"1":2,"2":3}',
+// which does not convert back to Int32Array.
 Int32Array.prototype.toJSONArray = function()
 {
     var a = "["
@@ -23,6 +26,10 @@ var file_handlers =
     "readyfortransfer": function (ws, data)
     {
         var slice = data["slice"]
+
+        // The slice read must not be greater than the the file.
+        // If it is, everything goes fine but the resulting ArrayBuffer
+        // can not be used by any of the ArrayBufferView subclasses.
         var start = slice * FILE_SLICE_SIZE
         var end = Math.min((slice + 1) * FILE_SLICE_SIZE, file_queue[data["id"]].size - 1)
 
@@ -43,7 +50,6 @@ var file_handlers =
             console.log("crypting: " + out)
 
             var crypted = sjcl.encrypt(passwd, out)
-            //var crypted = e.target.result
 
             ws.send(JSON.stringify({
                 "type": "fileslice",
@@ -60,8 +66,7 @@ var file_handlers =
         var a = document.createElement("a")
         var url =  "http://localhost:8888/get/" +
                 data["filename"] +
-                "#" +
-                document.getElementById("password").value
+                "#" + document.getElementById("password").value
 
         a.href = url
         a.innerHTML = url
@@ -124,25 +129,20 @@ document.addEventListener("DOMContentLoaded", function ()
         console.log("Websocket closed")
     })
 
-    var c = new Cryptloader()
+    var c = new Fileloader()
 
-    c.handleFiles = function (files)
+    c.fileLoad = function (file)
     {
-        for (var i in files)
+        console.log("Got a file " + file.type + " named " + file.name)
+
+        var slices = Math.ceil(file.size / FILE_SLICE_SIZE)
+        var id = (new Date()).toJSON() + "-" + Math.random()
+
+        if (slices > 0)
         {
-            var file = files[i]
-
-            console.log("Got a file " + file.type + " named " + file.name)
-
-            var slices = Math.ceil(file.size / FILE_SLICE_SIZE)
-            var id = (new Date()).toJSON() + "-" + Math.random()
-
-            if (slices > 0)
-            {
-                file_queue[id] = file
-                console.log("Beginning upload of " + file.size + " bytes in " + slices + " parts")
-                ws.send(JSON.stringify({"type": "incomingfile", "data": { "slices": slices, "id": id}}))
-            }
+            file_queue[id] = file
+            console.log("Beginning upload of " + file.size + " bytes in " + slices + " parts")
+            ws.send(JSON.stringify({"type": "incomingfile", "data": { "slices": slices, "id": id}}))
         }
     }
 

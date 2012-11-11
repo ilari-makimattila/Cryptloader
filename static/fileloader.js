@@ -1,10 +1,12 @@
-
-function Cryptloader()
+// Fileloader encapsulates the drag&drop logic.
+// You need just to overwrite the handleFiles method
+// or fileLoad method if you want to handle files one by one
+function Fileloader()
 {
 
 }
 
-Cryptloader.prototype = {
+Fileloader.prototype = {
     initialize: function (domElement)
     {
         var self = this
@@ -41,26 +43,16 @@ Cryptloader.prototype = {
 
     handleFiles: function (files)
     {
-        var self = this
         for (var i = 0; i < files.length; i++)
         {
             var file = files[i]
 
-            var reader = new FileReader()
-            reader.onload = function(e) { self.fileLoad(e) }
-            reader.onprogress = function(e) { self.fileProgress(e) }
-            reader.readAsDataURL(file)
+            this.fileLoad(file)
         }
     },
 
-    fileLoad: function (event)
+    fileLoad: function (file)
     {
         console.log("received a file!")
-    },
-
-    fileProgress: function (event)
-    {
-        console.log("progress!")
-        console.log(event)
     }
 }
